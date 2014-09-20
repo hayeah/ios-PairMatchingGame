@@ -14,6 +14,18 @@ class ViewController: UIViewController {
     weak var revealButton: UIButton!
     weak var shuffleButton: UIButton!
 
+    var cardsCount: Int {
+        get {
+            return self.pairsCount * 2
+        }
+    }
+
+    var pairsCount: Int {
+        get {
+            return Int(self.stepper.value)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
