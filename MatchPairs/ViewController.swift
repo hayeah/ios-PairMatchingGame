@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    weak var stepper: UIStepper!
+    weak var revealButton: UIButton!
+    weak var shuffleButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,19 +21,27 @@ class ViewController: UIViewController {
     }
 
     func setupControls() {
-        let stepper = UIStepper(frame: CGRect(x: 113, y: 20, width: 94, height: 29))
+        let stepperFrame = CGRect(x: 113, y: 20, width: 94, height: 29)
+        let revealButtonFrame = CGRect(x: 16, y: 20, width: 47, height: 30)
+        let shuffleButtonFrame = CGRect(x: 256, y: 20, width: 48, height: 30)
+
+        let stepper = UIStepper(frame: stepperFrame)
+        self.stepper = stepper
         stepper.maximumValue = 10
         stepper.minimumValue = 1
+        stepper.stepValue = 1
         stepper.value = 4
         self.view.addSubview(stepper)
 
         let revealButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
-        revealButton.frame = CGRect(x: 16, y: 20, width: 47, height: 30)
+        self.revealButton = revealButton
+        revealButton.frame = revealButtonFrame
         revealButton.setTitle("Reveal", forState: UIControlState.Normal)
         self.view.addSubview(revealButton)
 
         let shuffleButton = UIButton.buttonWithType(.System) as UIButton
-        shuffleButton.frame = CGRect(x: 256, y: 20, width: 48, height: 30)
+        self.shuffleButton = shuffleButton
+        shuffleButton.frame = shuffleButtonFrame
         shuffleButton.setTitle("Shuffle", forState: .Normal)
         self.view.addSubview(shuffleButton)
     }
