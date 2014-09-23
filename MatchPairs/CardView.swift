@@ -28,6 +28,13 @@ class CardView: UIControl {
 
     var frontLayer: CALayer!
     var backLayer: CALayer!
+    var card: Card? {
+        didSet {
+            let imgName = self.card!.imageName()
+            let img = UIImage(named: imgName)!.CGImage
+            self.frontLayer.contents = img
+        }
+    }
 
     override convenience init() {
         // super.init() // would this call setup? (yes!)
@@ -49,7 +56,7 @@ class CardView: UIControl {
         self.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
 
         self.frontLayer = CALayer()
-        self.frontLayer.contents = UIImage(named: "ace_of_spades")!.CGImage
+        // self.frontLayer.contents = UIImage(named: Card.random().imageName())!.CGImage
         self.layer.addSublayer(self.frontLayer)
 
         self.backLayer = CALayer()

@@ -86,6 +86,14 @@ class ViewController: UIViewController {
         for (i,cardView) in enumerate(self.cardViews) {
             cardView.frame = rects[i]
         }
+
+        assignCards()
+    }
+
+    func assignCards() {
+        for cardView in cardViews {
+            cardView.card = Card.random()
+        }
     }
 
     func stepperValueChanged(stepper: UIStepper) {
