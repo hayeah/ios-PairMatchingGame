@@ -30,10 +30,81 @@ class GameLayout {
         }()
 
     func forPairs(pairs: Int) -> [CGRect] {
-        assert(pairs >= 1 && pairs <= 10)
-        let slice = self.grid[0..<pairs*2]
-        let rects = Array(slice)
-        assert(rects.count == pairs*2)
+        assert(pairs>=1 && pairs<=10)
+        let index = pairs - 1
+        let level = gameLayouts[index]
+        var rects: [CGRect] = []
+
+        for (i,rect) in enumerate(self.grid) {
+            if level[i] == 1 {
+                rects.append(rect)
+            }
+        }
+        assert(rects.count == pairs * 2)
         return rects
     }
 }
+
+// Compiler/SourceKit Bug in [6A1052c]: Omit the `[[Int]]` type annotation seems to trigger exponential run-time in the type analyzer.
+// 9 elements takes about a minute to compile on my low-end MBP.
+private let gameLayouts: [[Int]] = [
+    [0,0,0,0,
+        0,0,0,0,
+        0,1,1,0,
+        0,0,0,0,
+        0,0,0,0],
+
+    [0,0,0,0,
+        0,0,0,0,
+        1,1,1,1,
+        0,0,0,0,
+        0,0,0,0],
+
+    [0,0,0,0,
+        0,1,1,0,
+        0,1,1,0,
+        0,1,1,0,
+        0,0,0,0],
+
+    [0,0,0,0,
+        1,0,0,1,
+        1,1,1,1,
+        1,0,0,1,
+        0,0,0,0],
+
+    [1,0,0,1,
+        0,1,1,0,
+        1,0,0,1,
+        0,1,1,0,
+        1,0,0,1],
+
+    [0,1,1,0,
+        1,0,0,1,
+        1,1,1,1,
+        1,0,0,1,
+        0,1,1,0],
+
+    [1,1,1,1,
+        1,0,0,1,
+        1,0,0,1,
+        1,0,0,1,
+        1,1,1,1],
+
+    [1,1,1,1,
+        1,0,0,1,
+        1,1,1,1,
+        1,0,0,1,
+        1,1,1,1],
+
+    [1,1,1,1,
+        1,1,1,1,
+        1,0,0,1,
+        1,1,1,1,
+        1,1,1,1],
+
+    [1,1,1,1,
+        1,1,1,1,
+        1,1,1,1,
+        1,1,1,1,
+        1,1,1,1],
+]
