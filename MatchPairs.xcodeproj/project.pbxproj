@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89697A8019CD5D98003D3031 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89697A7F19CD5D98003D3031 /* CardView.swift */; };
+		89697A8119CD5DB4003D3031 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89697A7F19CD5D98003D3031 /* CardView.swift */; };
+		897F5EF319D10D5D00B5FD2B /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F5EF219D10D5D00B5FD2B /* GameLayout.swift */; };
+		897F5EF419D10D9200B5FD2B /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F5EF219D10D5D00B5FD2B /* GameLayout.swift */; };
 		89A0798619CD120F0058A3F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A0798519CD120F0058A3F0 /* AppDelegate.swift */; };
 		89A0798819CD120F0058A3F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A0798719CD120F0058A3F0 /* ViewController.swift */; };
 		89A0798B19CD120F0058A3F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A0798919CD120F0058A3F0 /* Main.storyboard */; };
@@ -27,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		89697A7F19CD5D98003D3031 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		897F5EF219D10D5D00B5FD2B /* GameLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLayout.swift; sourceTree = "<group>"; };
 		89A0798019CD120F0058A3F0 /* MatchPairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchPairs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A0798419CD120F0058A3F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89A0798519CD120F0058A3F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +88,8 @@
 				89A0798919CD120F0058A3F0 /* Main.storyboard */,
 				89A0798C19CD120F0058A3F0 /* Images.xcassets */,
 				89A0798319CD120F0058A3F0 /* Supporting Files */,
+				89697A7F19CD5D98003D3031 /* CardView.swift */,
+				897F5EF219D10D5D00B5FD2B /* GameLayout.swift */,
 			);
 			path = MatchPairs;
 			sourceTree = "<group>";
@@ -221,6 +229,8 @@
 			files = (
 				89A0798819CD120F0058A3F0 /* ViewController.swift in Sources */,
 				89A0798619CD120F0058A3F0 /* AppDelegate.swift in Sources */,
+				89697A8019CD5D98003D3031 /* CardView.swift in Sources */,
+				897F5EF319D10D5D00B5FD2B /* GameLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +240,8 @@
 			files = (
 				89A079AB19CD193B0058A3F0 /* ViewController.swift in Sources */,
 				89A079AA19CD13E10058A3F0 /* SpecTests.swift in Sources */,
+				89697A8119CD5DB4003D3031 /* CardView.swift in Sources */,
+				897F5EF419D10D9200B5FD2B /* GameLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

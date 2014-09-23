@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     weak var stepper: UIStepper!
     weak var revealButton: UIButton!
     weak var shuffleButton: UIButton!
+    var cardViews = [CardView]()
+    var gameLayout = GameLayout()
 
     var cardsCount: Int {
         get {
@@ -30,6 +32,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         setupControls()
+        setupLayout()
     }
 
     func setupControls() {
@@ -56,6 +59,15 @@ class ViewController: UIViewController {
         shuffleButton.frame = shuffleButtonFrame
         shuffleButton.setTitle("Shuffle", forState: .Normal)
         self.view.addSubview(shuffleButton)
+    }
+
+    func setupLayout() {
+        for rect in self.gameLayout.grid {
+            let cardView = CardView()
+            cardView.frame = rect
+            self.view.addSubview(cardView)
+            self.cardViews.append(cardView)
+        }
     }
 
     override func didReceiveMemoryWarning() {
