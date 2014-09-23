@@ -18,6 +18,7 @@ class CardView: UIView {
         // Drawing code
     }
     */
+    var frontLayer: CALayer!
 
     override convenience init() {
         // super.init() // would this call setup? (yes!)
@@ -35,10 +36,16 @@ class CardView: UIView {
     }
 
     func setup() {
-        // self.backgroundColor = UIColor.grayColor()
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
-        self.layer.contents = UIImage(named: "ace_of_spades")!.CGImage
+
+        self.frontLayer = CALayer()
+        self.frontLayer.contents = UIImage(named: "ace_of_spades")!.CGImage
+        self.layer.addSublayer(self.frontLayer)
+    }
+
+    override func layoutSubviews() {
+        self.frontLayer.frame = CGRectInset(self.bounds,2,2)
     }
 
 }
