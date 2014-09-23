@@ -35,7 +35,10 @@ class CardView: UIView {
     }
 
     func setup() {
-        self.backgroundColor = UIColor.grayColor()
+        // self.backgroundColor = UIColor.grayColor()
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
+        self.layer.contents = UIImage(named: "ace_of_spades")!.CGImage
     }
 
 }
