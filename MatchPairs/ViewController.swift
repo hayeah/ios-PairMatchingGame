@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         self.revealButton = revealButton
         revealButton.frame = revealButtonFrame
         revealButton.setTitle("Reveal", forState: UIControlState.Normal)
+        revealButton.addTarget(self, action: "revealAll:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(revealButton)
 
         let shuffleButton = UIButton.buttonWithType(.System) as UIButton
@@ -74,6 +75,7 @@ class ViewController: UIViewController {
         while(toAdd > 0) {
             let cardView = CardView() // temporary set frame to zero. Will layout properly later.
             self.view.addSubview(cardView)
+            cardView.addTarget(self, action: "cardViewTapped:", forControlEvents: UIControlEvents.TouchUpInside)
             self.cardViews.append(cardView)
             toAdd--
         }
@@ -88,6 +90,16 @@ class ViewController: UIViewController {
 
     func stepperValueChanged(stepper: UIStepper) {
         setupLayout()
+    }
+
+    func cardViewTapped(cardView: CardView) {
+        cardView.selected = !cardView.selected
+    }
+
+    func revealAll(button: UIButton) {
+        for cardView in cardViews {
+            cardView.selected = true
+        }
     }
 
     override func didReceiveMemoryWarning() {

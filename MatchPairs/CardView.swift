@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CardView: UIView {
+private let backImage = UIImage(named: "back")!.CGImage
+class CardView: UIControl {
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -18,7 +19,15 @@ class CardView: UIView {
         // Drawing code
     }
     */
+
+    override var selected : Bool {
+        didSet {
+            updateSide()
+        }
+    }
+
     var frontLayer: CALayer!
+    var backLayer: CALayer!
 
     override convenience init() {
         // super.init() // would this call setup? (yes!)
@@ -42,10 +51,35 @@ class CardView: UIView {
         self.frontLayer = CALayer()
         self.frontLayer.contents = UIImage(named: "ace_of_spades")!.CGImage
         self.layer.addSublayer(self.frontLayer)
+
+        self.backLayer = CALayer()
+        self.backLayer.contents = backImage
+        self.layer.addSublayer(self.backLayer)
+
+        updateSide()
     }
 
     override func layoutSubviews() {
         self.frontLayer.frame = CGRectInset(self.bounds,2,2)
+        self.backLayer.frame = CGRectInset(self.bounds,2,2)
+    }
+
+    func showFront() {
+        self.frontLayer.hidden = false
+        self.backLayer.hidden = true
+    }
+
+    func showBack() {
+        self.frontLayer.hidden = true
+        self.backLayer.hidden = false
+    }
+
+    func updateSide() {
+        if(self.selected == true) {
+            self.showFront()
+        } else {
+            self.showBack()
+        }
     }
 
 }
