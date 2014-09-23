@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         stepper.stepValue = 1
         stepper.value = 4
         self.view.addSubview(stepper)
+        stepper.addTarget(self, action: "stepperValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
 
         let revealButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
         self.revealButton = revealButton
@@ -62,12 +63,31 @@ class ViewController: UIViewController {
     }
 
     func setupLayout() {
-        for rect in self.gameLayout.grid {
-            let cardView = CardView()
-            cardView.frame = rect
+        var toRemove = self.cardViews.count - self.cardsCount
+        while(toRemove > 0) {
+            let cardView = self.cardViews.removeLast()
+            cardView.removeFromSuperview()
+            toRemove--
+        }
+
+        var toAdd = self.cardsCount - cardViews.count
+        while(toAdd > 0) {
+            let cardView = CardView() // temporary set frame to zero. Will layout properly later.
             self.view.addSubview(cardView)
             self.cardViews.append(cardView)
+            toAdd--
         }
+
+        assert(self.cardViews.count == self.cardsCount)
+
+        let rects = gameLayout.forPairs(self.pairsCount)
+        for (i,cardView) in enumerate(self.cardViews) {
+            cardView.frame = rects[i]
+        }
+    }
+
+    func stepperValueChanged(stepper: UIStepper) {
+        setupLayout()
     }
 
     override func didReceiveMemoryWarning() {

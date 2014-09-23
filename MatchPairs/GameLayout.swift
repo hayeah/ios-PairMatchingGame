@@ -28,4 +28,12 @@ class GameLayout {
         assert(rects.count == rows*cols,"Should generate a \(cols)x\(rows) grid.")
         return rects
         }()
+
+    func forPairs(pairs: Int) -> [CGRect] {
+        assert(pairs >= 1 && pairs <= 10)
+        let slice = self.grid[0..<pairs*2]
+        let rects = Array(slice)
+        assert(rects.count == pairs*2)
+        return rects
+    }
 }
