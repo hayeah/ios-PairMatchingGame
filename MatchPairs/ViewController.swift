@@ -33,6 +33,7 @@ class ViewController: UIViewController {
 
         setupControls()
         setupLayout()
+        assignCards()
     }
 
     func setupControls() {
@@ -60,6 +61,7 @@ class ViewController: UIViewController {
         self.shuffleButton = shuffleButton
         shuffleButton.frame = shuffleButtonFrame
         shuffleButton.setTitle("Shuffle", forState: .Normal)
+        shuffleButton.addTarget(self, action: "shuffleTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(shuffleButton)
     }
 
@@ -86,28 +88,59 @@ class ViewController: UIViewController {
         for (i,cardView) in enumerate(self.cardViews) {
             cardView.frame = rects[i]
         }
-
-        assignCards()
     }
 
     func assignCards() {
+        var deck = Card.fullDeck()
+        shuffle(&deck)
+        var pairs = [Card]()
+        for i in 0..<self.pairsCount {
+            let card = deck[i]
+            pairs.append(card)
+            pairs.append(card)
+        }
+        shuffle(&pairs)
+        for (i,cardView) in enumerate(cardViews) {
+            cardView.card = pairs[i]
+        }
+    }
+
+    func hideCards() {
+        for cardView in self.cardViews {
+            cardView.selected = false
+        }
+    }
+
+    func revealCards() {
         for cardView in cardViews {
-            cardView.card = Card.random()
+            cardView.selected = true
+        }
+    }
+
+    func shuffleCards() {
+        self.revealCards()
+        self.assignCards()
+        // self.hideCards()
+        delay(1) {
+            self.hideCards()
         }
     }
 
     func stepperValueChanged(stepper: UIStepper) {
-        setupLayout()
+        self.setupLayout()
+        self.shuffleCards()
     }
 
     func cardViewTapped(cardView: CardView) {
         cardView.selected = !cardView.selected
     }
 
+    func shuffleTapped(button: UIButton) {
+        self.shuffleCards()
+    }
+
     func revealAll(button: UIButton) {
-        for cardView in cardViews {
-            cardView.selected = true
-        }
+        self.revealCards()
     }
 
     override func didReceiveMemoryWarning() {
