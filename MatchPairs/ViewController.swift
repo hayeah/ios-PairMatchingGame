@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     weak var shuffleButton: UIButton!
     var cardViews = [CardView]()
     var gameLayout = GameLayout()
+    var matchedPairs: Int = 0
+    var firstSelectedCardView: CardView?
 
     var cardsCount: Int {
         get {
@@ -118,6 +120,7 @@ class ViewController: UIViewController {
     }
 
     func shuffleCards() {
+        self.matchedPairs = 0
         self.revealCards()
         self.assignCards()
         // self.hideCards()
@@ -131,8 +134,37 @@ class ViewController: UIViewController {
         self.shuffleCards()
     }
 
+    func foundMatchingPair(#a: CardView, b: CardView) {
+        self.matchedPairs++
+        if self.matchedPairs == self.pairsCount {
+            self.showWinMessage()
+        }
+    }
+
     func cardViewTapped(cardView: CardView) {
-        cardView.selected = !cardView.selected
+        if cardView.selected {
+            return
+        }
+
+        if self.firstSelectedCardView == nil {
+            cardView.selected = true
+            firstSelectedCardView = cardView
+            return
+        }
+
+        cardView.selected = true
+        var first = firstSelectedCardView!
+        firstSelectedCardView = nil
+
+        if first.card! == cardView.card! {
+            foundMatchingPair(a: first, b: cardView)
+        } else {
+            delay(0.3) {
+                cardView.selected = false
+                first.selected = false
+            }
+
+        }
     }
 
     func shuffleTapped(button: UIButton) {
@@ -148,6 +180,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func showWinMessage() {
+        let alert = UIAlertController(title: "You Won", message: "Play another game!", preferredStyle: UIAlertControllerStyle.Alert)
 
+        let shuffle = UIAlertAction(title: "Shuffle", style: UIAlertActionStyle.Default, handler: {
+            _ in
+            self.shuffleCards()
+        })
+
+        alert.addAction(shuffle)
+
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
 
