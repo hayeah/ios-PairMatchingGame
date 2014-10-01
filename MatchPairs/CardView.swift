@@ -54,6 +54,7 @@ class CardView: UIControl {
     func setup() {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
+        self.layer.backgroundColor = UIColor.whiteColor().CGColor
 
         self.frontLayer = CALayer()
         // self.frontLayer.contents = UIImage(named: Card.random().imageName())!.CGImage
