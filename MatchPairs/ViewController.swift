@@ -123,10 +123,17 @@ class ViewController: UIViewController {
         self.matchedPairs = 0
         self.revealCards()
         self.assignCards()
-        // self.hideCards()
-        delay(1) {
+        UIView.animateWithDuration(1,
+        animations: {
+            var rects = self.gameLayout.forPairs(self.pairsCount)
+            shuffle(&rects)
+            for (i,cardView) in enumerate(self.cardViews) {
+                cardView.frame = rects[i]
+            }
+        },
+        completion: { completed in
             self.hideCards()
-        }
+        })
     }
 
     func stepperValueChanged(stepper: UIStepper) {
