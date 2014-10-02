@@ -35,7 +35,7 @@ class ViewController: UIViewController {
 
         setupControls()
         setupLayout()
-        assignCards()
+        shuffleCards()
     }
 
     func setupControls() {
@@ -75,9 +75,13 @@ class ViewController: UIViewController {
             toRemove--
         }
 
+        let grid = gameLayout.grid
         var toAdd = self.cardsCount - cardViews.count
         while(toAdd > 0) {
             let cardView = CardView() // temporary set frame to zero. Will layout properly later.
+            // Use to the 10th or 11th rectangles as the initial position
+            let rectIndex = (toAdd % 2) + 9 // Alternate between 10th and 11th
+            cardView.frame = grid[rectIndex]
             self.view.addSubview(cardView)
             cardView.addTarget(self, action: "cardViewTapped:", forControlEvents: UIControlEvents.TouchUpInside)
             self.cardViews.append(cardView)
@@ -85,11 +89,6 @@ class ViewController: UIViewController {
         }
 
         assert(self.cardViews.count == self.cardsCount)
-
-        let rects = gameLayout.forPairs(self.pairsCount)
-        for (i,cardView) in enumerate(self.cardViews) {
-            cardView.frame = rects[i]
-        }
     }
 
     func assignCards() {
