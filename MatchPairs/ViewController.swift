@@ -119,10 +119,12 @@ class ViewController: UIViewController {
         }
     }
 
+    var ongoingShuffleAnimationsCount = 0
     func shuffleCards() {
         self.matchedPairs = 0
         self.revealCards()
         self.assignCards()
+        ongoingShuffleAnimationsCount++
         UIView.animateWithDuration(1,
         animations: {
             var rects = self.gameLayout.forPairs(self.pairsCount)
@@ -132,7 +134,10 @@ class ViewController: UIViewController {
             }
         },
         completion: { completed in
-            self.hideCards()
+            self.ongoingShuffleAnimationsCount--
+            if self.ongoingShuffleAnimationsCount == 0 {
+                self.hideCards()
+            }
         })
     }
 
